@@ -1,0 +1,15 @@
+#
+# launch sbt with jrebel
+#
+java \
+  -Drebel.lift_plugin=true \
+  -Drebel.check_class_hash=true \
+  -Djava.library.path="./lib" \
+  -noverify \
+  -javaagent:$HOME/bin/jrebel/jrebel.jar \
+  -Xmx1024M \
+  -XX:ReservedCodeCacheSize=48m \
+  -Xss2M \
+  -XX:MaxPermSize=512m \
+  -XX:+CMSClassUnloadingEnabled \
+  -jar `dirname $0`/sbt-launch-0.13.1.jar "$@"
