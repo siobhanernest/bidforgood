@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:lift="http://liftweb.net">
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
   <title>Home</title>
@@ -16,9 +16,21 @@
     <code>padding-top: 60px;</code> on the <code>body > .container</code>.
   </p>
 
+    <h2>Your first CometActor!</h2>
+    <lift:comet type="CometMessage" name="Other">
+      Current Time: <comet:message>Missing Clock</comet:message>
+    </lift:comet>
+
   <p>
     <i class="fa fa-rebel"></i> fa-rebel
   </p>
+
+  <lift:comet type="Chat" name="none" >
+    <div><ul>
+      <chat:messages/>
+    </ul></div>
+    <chat:input />
+  </lift:comet>
 
 </div>
 </body>
