@@ -1,6 +1,6 @@
 package code.comet
 
-import actor.ChatServer
+import code.actor.ChatServer
 import net.liftweb.common.Full
 import net.liftweb.http.SHtml._
 import net.liftweb.http._

@@ -1,4 +1,4 @@
-package actor
+package code.actor
 
 import code.comet.ChatMessage
 import net.liftweb.actor._
