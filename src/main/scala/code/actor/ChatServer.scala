@@ -1,6 +1,5 @@
 package code.actor
 
-import code.comet.ChatMessage
 import net.liftweb.actor._
 import net.liftweb.http._
 
@@ -20,3 +19,7 @@ object ChatServer extends LiftActor with ListenerManager {
       updateListeners()
   }
 }
+
+case class ChatMessage(user: String, msg: String)
+
+

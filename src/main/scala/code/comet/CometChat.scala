@@ -1,6 +1,6 @@
 package code.comet
 
-import code.actor.ChatServer
+import code.actor.{ChatMessage, ChatServer}
 import net.liftweb.http.SHtml._
 import net.liftweb.http._
 
@@ -32,5 +32,3 @@ class CometChat extends CometActor with CometListener {
 
   private def sendMessage(msg: String) = ChatServer ! ChatMessage("default", msg)
 }
-
-case class ChatMessage(user: String, msg: String)

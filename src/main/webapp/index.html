@@ -9,28 +9,32 @@
 
   <!-- Begin page content -->
   <div class="page-header">
-    <h1>Sticky footer with fixed navbar</h1>
+    <h1>Current Inventory</h1>
   </div>
+
   <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom
     HTML and CSS. A fixed navbar has been added with
     <code>padding-top: 60px;</code> on the <code>body > .container</code>.
   </p>
 
-  <h2>Your first CometActor!</h2>
-  <lift:comet type="CometMessage" name="Other">
-    Current Time: <span class="message">Missing Clock</span>
-  </lift:comet>
-
-  <p>
-    <i class="fa fa-rebel"></i> fa-rebel
-  </p>
-
-  <lift:comet type="CometChat" name="none">
-    <div class="messages">
-      <ul><li class="message">a message</li></ul>
-    </div>
+  <lift:comet type="CometInventory" name="inventory">
+    <table class="table items">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="item">
+        <td class="id"></td>
+        <td class="desc"></td>
+      </tr>
+      </tbody>
+    </table>
     <div class="input"></div>
   </lift:comet>
+
 
 </div>
 </body>
