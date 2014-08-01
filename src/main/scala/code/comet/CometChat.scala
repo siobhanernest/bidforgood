@@ -1,6 +1,7 @@
 package code.comet
 
 import actor.ChatServer
+import net.liftweb.common.Full
 import net.liftweb.http.SHtml._
 import net.liftweb.http._
 
@@ -10,9 +11,11 @@ import net.liftweb.http._
  */
 case class ChatMessage(user: String, msg: String)
 
-class Chat extends CometActor with CometListener {
+class CometChat extends CometActor with CometListener {
 
   private var messages: List[ChatMessage] = Nil
+
+  override def defaultPrefix = Full("chat")
 
   def registerWith = ChatServer
 
@@ -22,7 +25,9 @@ class Chat extends CometActor with CometListener {
     </li>)}
   </div>
 
-  def render = bind("chat", "input" -> ajaxForm(SHtml.text("", sendMessage)), "messages" -> renderMessages)
+  def render =
+    "input" #> ajaxForm(SHtml.text("", sendMessage)) &
+        "messages" #> renderMessages
 
   private def sendMessage(msg: String) = ChatServer ! ChatMessage("default", msg)
 
