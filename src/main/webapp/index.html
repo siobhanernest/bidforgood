@@ -16,20 +16,18 @@
     <code>padding-top: 60px;</code> on the <code>body > .container</code>.
   </p>
 
-    <h2>Your first CometActor!</h2>
-    <lift:comet type="CometMessage" name="Other">
-      Current Time: <comet:message>Missing Clock</comet:message>
-    </lift:comet>
+  <h2>Your first CometActor!</h2>
+  <lift:comet type="CometMessage" name="Other">
+    Current Time: <span class="message">Missing Clock</span>
+  </lift:comet>
 
   <p>
     <i class="fa fa-rebel"></i> fa-rebel
   </p>
 
-  <lift:comet type="CometChat" name="none" >
-    <div><ul>
-      <chat:messages/>
-    </ul></div>
-    <chat:input />
+  <lift:comet type="CometChat" name="none">
+    <div class="messages"></div>
+    <div class="input"></div>
   </lift:comet>
 
 </div>
