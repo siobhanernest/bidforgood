@@ -4,6 +4,7 @@ import code.actor.{CreateItem, InventoryServer}
 import code.model.InventoryItem
 import net.liftweb.http.SHtml._
 import net.liftweb.http._
+import net.liftweb.http.js.{JsCmd, JsCmds}
 
 import scala.xml.NodeSeq
 
@@ -17,9 +18,19 @@ class CometInventory extends CometActor with CometListener {
 
   def registerWith = InventoryServer
 
-  def render =
-    ".input" #> ajaxForm(SHtml.text("", createItem)) &
+  def render = {
+
+    var description = ""
+
+    def process(): JsCmd = {
+      createItem(description)
+      JsCmds.Noop
+    }
+
+    "@desc" #> text(description, description = _) &
+        "type=submit" #> ajaxSubmit("New item", process) &
         ".items *" #> renderItems
+  }
 
   override def lowPriority = {
     case msg: List[InventoryItem] =>
@@ -29,10 +40,11 @@ class CometInventory extends CometActor with CometListener {
 
   private def renderItems =
     if (items.isEmpty) ".item" #> NodeSeq.Empty
-    else ".item" #> items.take(10).reverse.map(item => {
+    else ".item" #> items.take(5).reverse.map(item => {
       ".id *" #> item.id &
-      ".desc *" #> item.description
+          ".desc *" #> item.description
     })
 
-  private def createItem(description: String) = InventoryServer ! CreateItem(description)
+  private def createItem(description: String) =
+    InventoryServer ! CreateItem(description)
 }
