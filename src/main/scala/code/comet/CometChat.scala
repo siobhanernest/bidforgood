@@ -4,6 +4,8 @@ import code.actor.ChatServer
 import net.liftweb.http.SHtml._
 import net.liftweb.http._
 
+import scala.xml.NodeSeq
+
 /**
  * @author evan
  *         Date: 2014-07-30
@@ -14,23 +16,21 @@ class CometChat extends CometActor with CometListener {
 
   def registerWith = ChatServer
 
-  private def renderMessages = <div>
-    {messages.take(10).reverse.map(m => <li>
-      {m.msg}
-    </li>)}
-  </div>
-
   def render =
     ".input" #> ajaxForm(SHtml.text("", sendMessage)) &
         ".messages *" #> renderMessages
-
-  private def sendMessage(msg: String) = ChatServer ! ChatMessage("default", msg)
 
   override def lowPriority = {
     case msg: List[ChatMessage] =>
       messages = msg
       reRender(sendAll = false)
   }
+
+  private def renderMessages =
+    if (messages.isEmpty) ".message" #> NodeSeq.Empty
+    else ".message *" #> messages.take(10).reverse.map(_.msg)
+
+  private def sendMessage(msg: String) = ChatServer ! ChatMessage("default", msg)
 }
 
 case class ChatMessage(user: String, msg: String)
